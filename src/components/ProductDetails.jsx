@@ -22,11 +22,27 @@ function ProductDetails() {
 
   // Function to handle the deletion of the product
   // It sends a DELETE request to the API and navigates back to the product list on success.
-  const handleDelete = () => {
-    fetch(`https://fakestoreapi.com/products/${id}`, { method: 'DELETE' })
-      .then(() => navigate('/products'))
-      .catch(() => setError('Failed to delete product'));
-  };
+  const handleDelete = async (id) => {     
+    await fetch(
+       `https://fakestoreapi.com/products/${id}`, 
+       { method: "DELETE" }
+    )
+    .then(() => {      
+       return setProduct(product.filter(product => product.id !== id))   
+    })     
+    .then(() => {
+        navigate('/products'); // Redirect to the product list after deletion
+      })
+    .catch(() => setError('Failed to delete product'))
+    .then(() => setLoading(false)) // Set loading to false after deletion
+   
+    .then(() => setProduct(null)) // Clear the product state after deletion
+    .then(() => setShowModal(false)) // Close the modal after deletion
+    .finally(() => setLoading(false)); // Set loading to false after deletion
+
+  
+    
+}; 
 
   // Function to handle the edit button click
   // It navigates to the edit product page with the product ID.
