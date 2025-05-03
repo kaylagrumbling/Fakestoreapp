@@ -47,6 +47,7 @@ function ProductDetails() {
           <Card.Text>Price: ${product.price}</Card.Text>
           <Button variant="warning" onClick={() => navigate(`/edit-product/${id}`)}>Edit</Button>{' '}
           <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
+          <Button variant="secondary" onClick={() => navigate('/products')}>Add to Cart</Button>
         </Card.Body>
       </Card>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
