@@ -28,7 +28,7 @@ function ProductDetails() {
        { method: "DELETE" }
     )
     .then(() => {      
-       return setProduct(product.filter(product => product.id !== id))   
+       return alert("Product deleted successfully!"); // Show success alert after deletion   
     })     
     .then(() => {
         navigate('/products'); // Redirect to the product list after deletion
